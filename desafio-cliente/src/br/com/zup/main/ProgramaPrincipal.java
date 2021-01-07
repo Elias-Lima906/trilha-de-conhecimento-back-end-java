@@ -36,11 +36,19 @@ public class ProgramaPrincipal {
 		String email = teclado.nextLine();
 
 		System.out.print("\nIdade: ");
+		String telefone = teclado.next();
+
+		System.out.print("\nIdade: ");
+		String endereco = teclado.next();
+
+		System.out.print("\nIdade: ");
 		int idade = teclado.nextInt();
 
 		cliente.setNome(nome);
 		cliente.setCpf(cpf);
 		cliente.setEmail(email);
+		cliente.setTelefone(telefone);
+		cliente.setEndereco(endereco);
 		cliente.setIdade(idade);
 
 		try {
@@ -58,38 +66,46 @@ public class ProgramaPrincipal {
 		System.out.print("\nCPF: ");
 		String cpf = teclado.next();
 
-		if (clienteDao.verificaCliente(cpf) == false) {
-			System.err.println("\nCLIENTE NÃO EXISTE PARA SER ALTERADO!\n");
-			return;
-		} else {
-
-			teclado.nextLine();
-
-			System.out.println("\nAgora Digite as Novas informações Do Cliente:");
-
-			System.out.print("\nNome: ");
-			String nome = teclado.nextLine();
-
-			System.out.println("\nCpf: ");
-			String cpfAlterado = teclado.nextLine();
-
-			System.out.println("\nEmail: ");
-			String email = teclado.nextLine();
-
-			System.out.println("\nIdade: ");
-			int idade = teclado.nextInt();
-
-			cliente.setNome(nome);
-			cliente.setCpf(cpfAlterado);
-			cliente.setEmail(email);
-			cliente.setIdade(idade);
-
-			try {
-				clienteDao.alteraCliente(cpf, cliente);
-				System.out.println("\nCadastro alterado com sucesso!\n");
-			} catch (ClienteException e) {
-				System.err.println(e.getMensagemErro());
+		try {
+			if (clienteDao.verificaCliente(cpf) == false) {
+				System.err.println("\nCLIENTE NÃO EXISTE PARA SER ALTERADO!\n");
+				return;
 			}
+		} catch (ClienteException e) {
+			System.err.println(e.getMensagemErro());
+			return;
+		}
+
+		teclado.nextLine();
+
+		System.out.println("\nAgora Digite as Novas informações Do Cliente:");
+
+		System.out.print("\nNome: ");
+		String nome = teclado.nextLine();
+
+		System.out.print("\n\nEmail: ");
+		String email = teclado.nextLine();
+
+		System.out.print("\nIdade: ");
+		String telefone = teclado.next();
+
+		System.out.print("\nIdade: ");
+		String endereco = teclado.next();
+
+		System.out.print("\n\nIdade: ");
+		int idade = teclado.nextInt();
+
+		cliente.setNome(nome);
+		cliente.setEmail(email);
+		cliente.setTelefone(telefone);
+		cliente.setEndereco(endereco);
+		cliente.setIdade(idade);
+
+		try {
+			clienteDao.alteraCliente(cpf, cliente);
+			System.out.println("\nCadastro alterado com sucesso!\n");
+		} catch (ClienteException e) {
+			System.err.println(e.getMensagemErro());
 		}
 	}
 

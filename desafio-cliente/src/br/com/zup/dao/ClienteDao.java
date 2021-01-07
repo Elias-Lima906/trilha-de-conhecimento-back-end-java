@@ -24,42 +24,38 @@ public class ClienteDao {
 		clientes.add(novoCliente);
 	}
 
-	public boolean verificaCliente(String cpf) {
+	public boolean verificaCliente(String cpf) throws ClienteException {
 
-		for (int i = 0; i < clientes.size(); i++) {
-			if (!clientes.get(i).getCpf().equals(cpf)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public void alteraCliente(String cpf, Cliente cliente) throws ClienteException {
-
-		Cliente clienteAlterado = new Cliente();
 		if (clientes.size() == 0) {
 			throw new ClienteException("\nNÃO HÁ CADASTROS NO BANCO DE DADOS!\n");
 		}
 
 		for (int i = 0; i < clientes.size(); i++) {
-
-			if (!clientes.get(i).getCpf().equals(cpf)) {
-				throw new ClienteException("\nNÃO HÁ NENHUM CADASTRO COM ESSE CPF!\n");
+			if (clientes.get(i).getCpf().equals(cpf)) {
+				return true;
 			}
+		}
+		return false;
+	}
 
-			if (!cliente.getCpf().equals(cpf)) {
-				throw new ClienteException("\nO CPF NÃO PODE SER ALTERADO!\n");
+	public void alteraCliente(String cpf, Cliente cliente) throws ClienteException {
+
+		Cliente clienteAlterado = new Cliente();
+
+		for (int i = 0; i < clientes.size(); i++) {
+			if (clientes.get(i).getCpf().equals(cpf)) {
+				clienteAlterado = clientes.get(i);
+
+				clienteAlterado.setEmail(cliente.getEmail());
+				clienteAlterado.setNome(cliente.getNome());
+				clienteAlterado.setIdade(cliente.getIdade());
+				clienteAlterado.setTelefone(cliente.getTelefone());
+				clienteAlterado.setEndereco(cliente.getEndereco());
+				clienteAlterado.setCpf(cpf);
+
+				clientes.remove(clientes.get(i));
+				clientes.add(clienteAlterado);
 			}
-
-			clienteAlterado = clientes.get(i);
-
-			clienteAlterado.setEmail(cliente.getEmail());
-			clienteAlterado.setNome(cliente.getNome());
-			clienteAlterado.setIdade(cliente.getIdade());
-			clienteAlterado.setCpf(cpf);
-
-			clientes.remove(clientes.get(i));
-			clientes.add(clienteAlterado);
 		}
 	}
 
@@ -86,11 +82,13 @@ public class ClienteDao {
 	public void removeCliente(String cpf) throws ClienteException {
 
 		for (int i = 0; i < clientes.size(); i++) {
-			if (!cpf.equals(clientes.get(i).getCpf())) {
-				throw new ClienteException("\nCLIENTE NÃO ENCONTRADO PARA REMOVER!\n");
-			}
 
-			clientes.remove(clientes.get(i));
+			if (cpf.equals(clientes.get(i).getCpf())) {
+				clientes.remove(clientes.get(i));
+				return;
+			}
 		}
+
+		throw new ClienteException("\nCLIENTE NÃO ENCONTRADO PARA REMOVER!\n");
 	}
 }

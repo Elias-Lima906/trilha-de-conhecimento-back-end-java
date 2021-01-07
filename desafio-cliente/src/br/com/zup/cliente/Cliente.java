@@ -6,13 +6,16 @@ public class Cliente {
 	private int idade;
 	private String cpf;
 	private String email;
+	private String telefone;
+	private String endereco;
 
 	public Cliente() {
 	}
 
 	@Override
 	public String toString() {
-		return "\nNOME: " + nome + "\nIDADE: " + idade + "\nCPF: " + cpf + "\nEMAIL: " + email;
+		return "\nNOME: " + nome + "\nIDADE: " + idade + "\nCPF: " + cpf + "\nEMAIL: " + email + "\nTELEFONE: "
+				+ telefone + "\nENDEREÇO: " + endereco;
 	}
 
 	public String getNome() {
@@ -45,5 +48,21 @@ public class Cliente {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 }
