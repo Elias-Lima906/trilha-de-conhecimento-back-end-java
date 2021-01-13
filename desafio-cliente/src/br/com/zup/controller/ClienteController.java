@@ -2,6 +2,8 @@ package br.com.zup.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -37,11 +39,20 @@ public class ClienteController extends HttpServlet {
 			} catch (ClienteException e) {
 				e.printStackTrace();
 				writer.println(e.getMensagemErro());
+
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 
 		} else if (cpf == null) {
 
-			List<Cliente> clientes = clienteDao.listaClientes();
+			List<Cliente> clientes = new ArrayList<Cliente>();
+			try {
+				clientes = clienteDao.listaClientes();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
 			for (Cliente clienteExistente : clientes) {
 				writer.println(clienteExistente);
@@ -65,9 +76,13 @@ public class ClienteController extends HttpServlet {
 		try {
 			clienteDao.adicionaCliente(cliente);
 			writer.println("Cliente Salvo Com Sucesso");
+
 		} catch (ClienteException e) {
 			e.printStackTrace();
 			writer.println(e.getMensagemErro());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -85,33 +100,34 @@ public class ClienteController extends HttpServlet {
 		cliente.setEndereco(request.getParameter("endereco"));
 
 		try {
-
-			if (clienteDao.verificaCliente(cpf)) {
-				clienteDao.alteraCliente(cpf, cliente);
-				writer.println("Cadastro alterado com sucesso!");
-				return;
-			}
-
-			writer.println("Cliente não alterado!");
+			clienteDao.alteraCliente(cpf, cliente);
+			writer.println("Cadastro alterado com sucesso!");
 
 		} catch (ClienteException e) {
 			e.printStackTrace();
 			writer.println(e.getMensagemErro());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter writer = response.getWriter();
-		
+
 		String cpf = request.getParameter("cpf");
 
 		try {
 			clienteDao.removeCliente(cpf);
 			writer.println("Removido com sucesso!");
+
 		} catch (ClienteException e) {
 			e.printStackTrace();
 			writer.println(e.getMensagemErro());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 	}
