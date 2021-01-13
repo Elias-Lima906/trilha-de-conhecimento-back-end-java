@@ -80,9 +80,6 @@ public class ClienteController extends HttpServlet {
 		} catch (ClienteException e) {
 			e.printStackTrace();
 			writer.println(e.getMensagemErro());
-
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 	}
 

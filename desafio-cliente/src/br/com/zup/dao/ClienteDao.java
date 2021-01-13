@@ -19,21 +19,29 @@ public class ClienteDao {
 		this.connection = new ConnectionFactory().getConnection();
 	}
 
-	public void adicionaCliente(Cliente novoCliente) throws ClienteException, SQLException {
+	public void adicionaCliente(Cliente novoCliente) throws ClienteException {
 
 		String sqlInsert = "insert into clientes" + "(nome, idade, cpf, email, telefone, endereco) "
 				+ "values (?, ?, ?, ?, ?, ?);";
 
-		PreparedStatement stmt = connection.prepareStatement(sqlInsert);
-		stmt.setString(1, novoCliente.getNome());
-		stmt.setInt(2, novoCliente.getIdade());
-		stmt.setString(3, novoCliente.getCpf());
-		stmt.setString(4, novoCliente.getEmail());
-		stmt.setString(5, novoCliente.getTelefone());
-		stmt.setString(6, novoCliente.getEndereco());
+		try {
 
-		stmt.execute();
-		stmt.close();
+			PreparedStatement stmt = connection.prepareStatement(sqlInsert);
+			stmt.setString(1, novoCliente.getNome());
+			stmt.setInt(2, novoCliente.getIdade());
+			stmt.setString(3, novoCliente.getCpf());
+			stmt.setString(4, novoCliente.getEmail());
+			stmt.setString(5, novoCliente.getTelefone());
+			stmt.setString(6, novoCliente.getEndereco());
+
+			stmt.execute();
+			stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new ClienteException("CLIENTE JÁ EXISTE NO BANCO DE DADOS!");
+		}
+
 	}
 
 	public void alteraCliente(String cpf, Cliente clienteASerAlterado) throws ClienteException, SQLException {
@@ -61,7 +69,6 @@ public class ClienteDao {
 		}
 
 		throw new ClienteException("CLIENTE NÃO ENCONTRADO!");
-
 	}
 
 	public Cliente buscaCliente(String cpf) throws ClienteException, SQLException {
@@ -86,17 +93,19 @@ public class ClienteDao {
 		return clientes;
 	}
 
-	public boolean removeCliente(String cpf) throws ClienteException, SQLException {
+	public void removeCliente(String cpf) throws ClienteException, SQLException {
 
-		String sqlConsulta = "delete from clientes where cpf = ?;";
+		if (this.verificaExistenciaCliente(cpf) != null) {
 
-		PreparedStatement stmt = connection.prepareStatement(sqlConsulta);
+			String sqlConsulta = "delete from clientes where cpf = ?;";
 
-		stmt.setString(1, cpf);
+			PreparedStatement stmt = connection.prepareStatement(sqlConsulta);
 
-		if (stmt.execute()) {
+			stmt.setString(1, cpf);
+
+			stmt.execute();
 			stmt.close();
-			return true;
+			return;
 		}
 
 		throw new ClienteException("\nCLIENTE NÃO ENCONTRADO PARA REMOVER!\n");
@@ -118,16 +127,22 @@ public class ClienteDao {
 	private Cliente populaInformacoesClienteBuscadoPorId(PreparedStatement stmt) throws SQLException {
 
 		ResultSet rs = stmt.executeQuery();
-		Cliente cliente = new Cliente();
 
-		cliente.setNome(rs.getString("nome"));
-		cliente.setIdade(rs.getInt("idade"));
-		cliente.setCpf(rs.getString("cpf"));
-		cliente.setEmail(rs.getString("email"));
-		cliente.setTelefone(rs.getString("telefone"));
-		cliente.setEndereco(rs.getString("endereco"));
+		if (rs.next()) {
 
-		return cliente;
+			Cliente cliente = new Cliente();
+
+			cliente.setNome(rs.getString("nome"));
+			cliente.setIdade(rs.getInt("idade"));
+			cliente.setCpf(rs.getString("cpf"));
+			cliente.setEmail(rs.getString("email"));
+			cliente.setTelefone(rs.getString("telefone"));
+			cliente.setEndereco(rs.getString("endereco"));
+
+			return cliente;
+		}
+
+		return null;
 	}
 
 	private List<Cliente> populaListaDeClientesASerListada(PreparedStatement stmt) throws SQLException {
