@@ -1,4 +1,4 @@
-package br.com.zup.cliente.service;
+package br.com.zup.cliente.service.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
