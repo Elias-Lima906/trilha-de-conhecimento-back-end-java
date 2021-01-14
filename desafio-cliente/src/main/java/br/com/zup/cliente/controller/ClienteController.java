@@ -1,6 +1,9 @@
 package br.com.zup.cliente.controller;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,6 +20,7 @@ import br.com.zup.cliente.dto.ClienteDTO;
 import br.com.zup.cliente.dto.MensagemDTO;
 import br.com.zup.cliente.dto.alteraClienteDTO;
 import br.com.zup.cliente.entity.Cliente;
+import br.com.zup.cliente.exception.ClienteException;
 import br.com.zup.cliente.service.ClienteService;
 
 @RestController
@@ -32,22 +36,22 @@ public class ClienteController {
 	}
 
 	@GetMapping(path = "/{cpf}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Cliente buscaCliente(@PathVariable String cpf) {
+	public Optional<Cliente> buscaCliente(@PathVariable String cpf) throws ClienteException {
 		return clienteService.buscaCliente(cpf);
 	}
 
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Cliente adicionaCliente(@RequestBody ClienteDTO clienteDto) {
+	public Cliente adicionaCliente(@Valid @RequestBody ClienteDTO clienteDto) throws ClienteException {
 		return clienteService.adicionaCliente(clienteDto);
 	}
 
 	@PutMapping(path = "/{cpf}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Cliente alteraCliente(@PathVariable String cpf, @RequestBody alteraClienteDTO clienteDTO) {
+	public Optional<Cliente> alteraCliente(@PathVariable String cpf, @Valid @RequestBody alteraClienteDTO clienteDTO) throws ClienteException {
 		return clienteService.alteraCliente(cpf, clienteDTO);
 	}
 
 	@DeleteMapping(path = "/{cpf}")
-	public MensagemDTO removeCliente(@PathVariable String cpf) {
+	public MensagemDTO removeCliente(@PathVariable String cpf) throws ClienteException {
 		return clienteService.removeCliente(cpf);
 	}
 }
