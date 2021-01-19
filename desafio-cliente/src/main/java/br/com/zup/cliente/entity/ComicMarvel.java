@@ -1,21 +1,36 @@
 package br.com.zup.cliente.entity;
 
-public class ResultReponse {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-	private Integer id;
+@Entity
+public class ComicMarvel {
+
+	@Id
+	private Long id;
+	
+	@Column(length = 1000)
 	private String title;
+	
+	@Column(length = 10000)
 	private String description;
+	
 	private String modified;
+	
 	private String diamondCode;
+	
 	private String ean;
+	
 	private String format;
-	private Integer pageCount;
+	
+	 private Integer pageCount;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

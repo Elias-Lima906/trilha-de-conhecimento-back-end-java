@@ -19,8 +19,8 @@ import br.com.zup.cliente.dto.ErrorDTO;
 public class GlobalExceptionHandler {
 
 	@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-	@ExceptionHandler(ClienteException.class)
-	public @ResponseBody ErrorDTO handleGenericException(ClienteException e) {
+	@ExceptionHandler(GlobalException.class)
+	public @ResponseBody ErrorDTO handleGenericException(GlobalException e) {
 		e.printStackTrace();
 		return new ErrorDTO(e.getMensagemErro());
 	}

@@ -20,7 +20,7 @@ import br.com.zup.cliente.dto.ClienteDTO;
 import br.com.zup.cliente.dto.MensagemDTO;
 import br.com.zup.cliente.dto.alteraClienteDTO;
 import br.com.zup.cliente.entity.Cliente;
-import br.com.zup.cliente.exception.ClienteException;
+import br.com.zup.cliente.exception.GlobalException;
 import br.com.zup.cliente.service.ClienteService;
 
 @RestController
@@ -36,22 +36,22 @@ public class ClienteController {
 	}
 
 	@GetMapping(path = "/{cpf}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Optional<Cliente> buscaCliente(@PathVariable String cpf) throws ClienteException {
+	public Optional<Cliente> buscaCliente(@PathVariable String cpf) throws GlobalException {
 		return clienteService.buscaCliente(cpf);
 	}
 
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Cliente adicionaCliente(@Valid @RequestBody ClienteDTO clienteDto) throws ClienteException {
+	public Cliente adicionaCliente(@Valid @RequestBody ClienteDTO clienteDto) throws GlobalException {
 		return clienteService.adicionaCliente(clienteDto);
 	}
 
 	@PutMapping(path = "/{cpf}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Optional<Cliente> alteraCliente(@PathVariable String cpf, @Valid @RequestBody alteraClienteDTO clienteDTO) throws ClienteException {
+	public Optional<Cliente> alteraCliente(@PathVariable String cpf, @Valid @RequestBody alteraClienteDTO clienteDTO) throws GlobalException {
 		return clienteService.alteraCliente(cpf, clienteDTO);
 	}
 
 	@DeleteMapping(path = "/{cpf}")
-	public MensagemDTO removeCliente(@PathVariable String cpf) throws ClienteException {
+	public MensagemDTO removeCliente(@PathVariable String cpf) throws GlobalException {
 		return clienteService.removeCliente(cpf);
 	}
 }

@@ -1,12 +1,12 @@
 package br.com.zup.cliente.exception;
 
-public class ClienteException extends Exception {
+public class GlobalException extends Exception {
 
 	private static final long serialVersionUID = 4592620498402206441L;
 
 	private String mensagemErro;
 
-	public ClienteException(String mensagemErro) {
+	public GlobalException(String mensagemErro) {
 		this.mensagemErro = mensagemErro;
 	}
 
