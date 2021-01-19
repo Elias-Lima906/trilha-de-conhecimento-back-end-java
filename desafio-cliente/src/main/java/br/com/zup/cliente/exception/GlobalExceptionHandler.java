@@ -18,35 +18,35 @@ import br.com.zup.cliente.dto.ErrorDTO;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    @ExceptionHandler(ClienteException.class)
-    public @ResponseBody ErrorDTO handleGenericException(ClienteException e) {
-        e.printStackTrace();
-        return new ErrorDTO(e.getMensagemErro());
-    }
+	@ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+	@ExceptionHandler(ClienteException.class)
+	public @ResponseBody ErrorDTO handleGenericException(ClienteException e) {
+		e.printStackTrace();
+		return new ErrorDTO(e.getMensagemErro());
+	}
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public @ResponseBody List<ErrorDTO> handleValidationError(MethodArgumentNotValidException e) {
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public @ResponseBody List<ErrorDTO> handleValidationError(MethodArgumentNotValidException e) {
 
-        List<ErrorDTO> errosDeValidacao = new ArrayList<>();
+		List<ErrorDTO> errosDeValidacao = new ArrayList<>();
 
-        for (ObjectError erro : e.getBindingResult().getAllErrors()) {
+		for (ObjectError erro : e.getBindingResult().getAllErrors()) {
 
-            if (nonNull(erro.getCodes())) {
-                String mensagemASerExibida = erro.getDefaultMessage();
-                errosDeValidacao.add(new ErrorDTO(mensagemASerExibida.toString()));
-            }
-        }
+			if (nonNull(erro.getCodes())) {
 
-        return errosDeValidacao;
-    }
+				errosDeValidacao.add(new ErrorDTO(erro.getDefaultMessage().toString()));
+			}
+		}
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(Exception.class)
-    public @ResponseBody ErrorDTO handleGenericException(Exception e) {
-        e.printStackTrace() ;
-        return new ErrorDTO(e.getLocalizedMessage());
-    }
+		return errosDeValidacao;
+	}
+
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler(Exception.class)
+	public @ResponseBody ErrorDTO handleGenericException(Exception e) {
+		e.printStackTrace();
+		return new ErrorDTO(e.getLocalizedMessage());
+	}
 
 }

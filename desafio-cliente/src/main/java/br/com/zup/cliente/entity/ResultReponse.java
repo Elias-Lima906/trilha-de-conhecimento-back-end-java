@@ -1,13 +1,11 @@
 package br.com.zup.cliente.entity;
 
-import java.sql.Date;
-
-public class Comic {
+public class ResultReponse {
 
 	private Integer id;
 	private String title;
 	private String description;
-	private Date modified;
+	private String modified;
 	private String diamondCode;
 	private String ean;
 	private String format;
@@ -37,11 +35,11 @@ public class Comic {
 		this.description = description;
 	}
 
-	public Date getModified() {
+	public String getModified() {
 		return modified;
 	}
 
-	public void setModified(Date modified) {
+	public void setModified(String modified) {
 		this.modified = modified;
 	}
 
