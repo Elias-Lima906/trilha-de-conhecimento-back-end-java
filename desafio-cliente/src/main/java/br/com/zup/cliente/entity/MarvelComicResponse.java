@@ -1,8 +1,12 @@
 package br.com.zup.cliente.entity;
 
 public class MarvelComicResponse {
-	
+
 	private MarvelComicDataResponse data;
+
+	public MarvelComicResponse() {
+		this.data = new MarvelComicDataResponse();
+	}
 
 	public MarvelComicDataResponse getData() {
 		return data;

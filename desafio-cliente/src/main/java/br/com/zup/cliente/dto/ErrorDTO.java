@@ -2,7 +2,6 @@ package br.com.zup.cliente.dto;
 
 public class ErrorDTO {
 
-
 	private String mensagemErro;
 
 	public ErrorDTO(String mensagemErro) {
@@ -15,6 +14,6 @@ public class ErrorDTO {
 
 	public void setMensagemErro(String mensagemErro) {
 		this.mensagemErro = mensagemErro;
-	}	
-	
+	}
+
 }

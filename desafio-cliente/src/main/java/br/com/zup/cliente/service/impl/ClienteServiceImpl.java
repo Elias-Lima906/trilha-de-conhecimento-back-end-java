@@ -30,11 +30,11 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public Optional<Cliente> buscaCliente(String cpf) throws GlobalException {
 
-		if (clienteRepository.existsById(cpf)) {
-			return clienteRepository.findById(cpf);
+		if (!clienteRepository.existsById(cpf)) {
+			throw new GlobalException(CLIENTE_NÃO_ENCONTRADO);
 		}
 
-		throw new GlobalException(CLIENTE_NÃO_ENCONTRADO);
+		return clienteRepository.findById(cpf);
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class ClienteServiceImpl implements ClienteService {
 	public MensagemDTO removeCliente(String cpf) throws GlobalException {
 
 		if (clienteRepository.existsById(cpf)) {
-			
+
 			clienteRepository.deleteById(cpf);
 			return new MensagemDTO(CLIENTE_REMOVIDO_COM_SUCESSO);
 		}

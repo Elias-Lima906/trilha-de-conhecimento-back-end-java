@@ -26,10 +26,12 @@ public class ComicServiceImpl implements ComicService {
 	@Autowired
 	ComicMarvelRepository comicMarvelRepository;
 
-	@Override
-	public List<ComicMarvel> listComics(String privateKey) {
+	@Autowired
+	RestTemplate restTemplate;
 
-		RestTemplate restTemplate = new RestTemplate();
+	@Override
+	public List<ComicMarvel> listComicsFromMarvelAPI(String privateKey) {
+
 		long ts = this.timeStampFactory();
 
 		String hash = this.createHashMD5(ts, privateKey);
@@ -45,7 +47,7 @@ public class ComicServiceImpl implements ComicService {
 	@Override
 	public List<ComicMarvel> saveComic(String privateKey) {
 
-		List<ComicMarvel> comics = this.listComics(privateKey);
+		List<ComicMarvel> comics = this.listComicsFromMarvelAPI(privateKey);
 
 		comics.stream().forEach(c -> comicMarvelRepository.save(c));
 
@@ -56,24 +58,24 @@ public class ComicServiceImpl implements ComicService {
 	public List<ComicMarvel> listAll() {
 		return (List<ComicMarvel>) comicMarvelRepository.findAll();
 	}
-	
+
 	@Override
-	public Optional<ComicMarvel> getById(Long id) throws GlobalException  {
-		
-		if(!comicMarvelRepository.existsById(id)) {
+	public Optional<ComicMarvel> getById(Long id) throws GlobalException {
+
+		if (!comicMarvelRepository.existsById(id)) {
 			throw new GlobalException("REVISTA NÃO ENCONTRADA!");
 		}
-		
+
 		return comicMarvelRepository.findById(id);
 	}
-	
+
 	@Override
-	public MensagemDTO deleteById (Long id) throws GlobalException  {
-		
-		if(!comicMarvelRepository.existsById(id)) {
+	public MensagemDTO deleteById(Long id) throws GlobalException {
+
+		if (!comicMarvelRepository.existsById(id)) {
 			throw new GlobalException("REVISTA NÃO ENCONTRADA!");
 		}
-		
+
 		comicMarvelRepository.deleteById(id);
 		return new MensagemDTO("REVISTA APAGADA COM SUCESSO!");
 	}
@@ -98,7 +100,5 @@ public class ComicServiceImpl implements ComicService {
 
 		return uri;
 	}
-
-
 
 }

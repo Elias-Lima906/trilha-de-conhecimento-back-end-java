@@ -11,14 +11,15 @@ import br.com.zup.cliente.exception.GlobalException;
 
 public interface ComicService {
 
-	public List<ComicMarvel> listComics(String privateKey) throws UnsupportedEncodingException, NoSuchAlgorithmException;
+	public List<ComicMarvel> listComicsFromMarvelAPI(String privateKey)
+			throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
 	public List<ComicMarvel> saveComic(String privateKey);
-	
+
 	public List<ComicMarvel> listAll();
 
 	public Optional<ComicMarvel> getById(Long id) throws GlobalException;
-	
+
 	public MensagemDTO deleteById(Long id) throws GlobalException;
-	
+
 }

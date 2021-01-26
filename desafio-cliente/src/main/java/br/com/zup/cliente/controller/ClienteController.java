@@ -46,7 +46,8 @@ public class ClienteController {
 	}
 
 	@PutMapping(path = "/{cpf}", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public Optional<Cliente> alteraCliente(@PathVariable String cpf, @Valid @RequestBody alteraClienteDTO clienteDTO) throws GlobalException {
+	public Optional<Cliente> alteraCliente(@PathVariable String cpf, @Valid @RequestBody alteraClienteDTO clienteDTO)
+			throws GlobalException {
 		return clienteService.alteraCliente(cpf, clienteDTO);
 	}
 

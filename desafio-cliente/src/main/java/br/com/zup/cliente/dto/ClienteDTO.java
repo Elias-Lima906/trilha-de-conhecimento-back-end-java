@@ -19,11 +19,11 @@ public class ClienteDTO {
 	private int idade;
 
 	@NotBlank(message = "O campo EMAIL precisa ser preenchido.")
-    @Email(message = "O EMAIL informado precisa ser válido.")
+	@Email(message = "O EMAIL informado precisa ser válido.")
 	private String email;
 
 	@NotBlank(message = "O campo TELEFONE precisa ser preenchido.")
-    @Size(max = 11, message = "O TELEFONE pode ter no máximo 11 dígitos.")
+	@Size(max = 11, message = "O TELEFONE pode ter no máximo 11 dígitos.")
 	private String telefone;
 
 	@NotBlank(message = "O campo ENDEREÇO precisa ser preenchido.")

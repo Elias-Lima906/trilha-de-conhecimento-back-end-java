@@ -28,25 +28,26 @@ public class ComicController {
 	ComicService comicService;
 
 	@GetMapping(path = "/APIMarvel", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public List<ComicMarvel> listComics(@RequestParam String privateKey) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-		return comicService.listComics(privateKey);
+	public List<ComicMarvel> listComicsFromMarvelAPI(@RequestParam String privateKey)
+			throws UnsupportedEncodingException, NoSuchAlgorithmException {
+		return comicService.listComicsFromMarvelAPI(privateKey);
 	}
-	
+
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public List<ComicMarvel> saveComic(@RequestParam String privateKey) {
 		return comicService.saveComic(privateKey);
 	}
-	
+
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public List<ComicMarvel> listAll(){
+	public List<ComicMarvel> listAll() {
 		return comicService.listAll();
 	}
-	
+
 	@GetMapping(path = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public Optional<ComicMarvel> getById(@PathVariable Long id) throws GlobalException {
 		return comicService.getById(id);
 	}
-	
+
 	@DeleteMapping(path = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public MensagemDTO deleteById(@PathVariable Long id) throws GlobalException {
 		return comicService.deleteById(id);
