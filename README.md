@@ -34,10 +34,10 @@ Há além disso um CRUD de cliente, vizando numa proxima fase, transforma-lá nu
 
 ```bash
 # clonar repositório
-git clone https:
+git clone https: https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java.git
 
-# entrar na pasta do projeto star-beauty
-cd star-beauty
+# entrar na pasta do projeto
+cd ```nome do projeto```
 
 # executar o projeto
 mvn sprin-boot:run
