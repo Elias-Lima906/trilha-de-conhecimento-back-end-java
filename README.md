@@ -1,6 +1,6 @@
-# Comics Marvel
-
 ![GitHub](https://img.shields.io/github/license/Elias-Lima906/trilha-de-conhecimento-back-end-java)
+
+# Comics Marvel
 
 ## Sobre o projeto
 
