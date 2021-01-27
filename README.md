@@ -40,7 +40,7 @@ git clone https: https://github.com/Elias-Lima906/trilha-de-conhecimento-back-en
 cd ```nome do projeto```
 
 # executar o projeto
-mvn sprin-boot:run
+mvn spring-boot:run
 ```
 
 # Autoria
