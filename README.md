@@ -6,7 +6,8 @@
 
 Comics Marvel é uma aplicação que faz integração com a API da MARVEL!
 
-A API foi construida durante a [**trilha de conhecimento em java**] com o intuito de aprendizado.
+A API foi construida durante a ```trilha de conhecimento em java``` com o intuito de aprendizado.
+
 Cada recurso nela foi um tópico a ser estudado, como:
 
 - Estrutura em camadas
@@ -44,4 +45,4 @@ mvn sprin-boot:run
 
 # Autoria
 
-[Elias Pereira de Lima](https://www.linkedin.com/in/elias-lima-298373190)
+Linked-In: [Elias Pereira de Lima](https://www.linkedin.com/in/elias-lima-298373190)
