@@ -21,22 +21,14 @@ import br.com.zup.cliente.service.ComicService;
 
 @Service
 public class ComicServiceImpl implements ComicService {
-	
+
 	private static final String REVISTA_APAGADA_COM_SUCESSO = "REVISTA APAGADA COM SUCESSO!";
 
-	private static final String REVISTA_NÃO_ENCONTRADA = "REVISTA NÃO ENCONTRADA!";
+	private static final String REVISTA_NÃO_ENCONTRADA = "REVISTA NÃO ENCONTRADA PELO ID: ";
 
-	private static final String INICIANDO_PROCEDIMENTO_DE_VERIFICAÇÃO_DE_EXISTÊNCIA = "Iniciando procedimento de verificação de existência!";
+	private static final String INICIANDO_PROCESSO = "Iniciando processo!";
 
-	private static final String PROCESSO_FINALIZADO = "Processo finalizado com sucesso!";
-
-	private static final String INICIANDO_SAVE_NO_BANCO_DE_DADOS = "Iniciando save no banco de dados!";
-
-	private static final String CONEXÃO_FINALIZADA_COM_SUCESSO = "Conexão finalizada com sucesso!";
-
-	private static final String INICIANDO_CONEXÃO_COM_API_MARVEL = "Iniciando conexão com API MARVEL!";
-
-	private static final String INICIANDO_MÉTODO_DE_INTEGRAÇÃO_COM_API_EXTERNA = "Iniciando método de integração com API externa!";
+	private static final String PROCESSO_FINALIZADO = "Processo finalizado!";
 
 	private final String PUBLIC_KEY = "76f2f2fec8a2c2c18a67aa059e5c0e5c";
 
@@ -45,26 +37,24 @@ public class ComicServiceImpl implements ComicService {
 
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	private Logger logger = Logger.getLogger(ClienteServiceImpl.class);
 
 	@Override
 	public List<ComicMarvel> listComicsFromMarvelAPI(String privateKey) {
 
-		logger.info(INICIANDO_MÉTODO_DE_INTEGRAÇÃO_COM_API_EXTERNA);
-		
+		logger.info(INICIANDO_PROCESSO);
+
 		long ts = this.timeStampFactory();
 
 		String hash = this.createHashMD5(ts, privateKey);
 
 		UriComponents uri = this.UriBuilder(hash, ts);
 
-		logger.info(INICIANDO_CONEXÃO_COM_API_MARVEL);
-		
 		List<ComicMarvel> comics = restTemplate.getForObject(uri.toUriString(), MarvelComicResponse.class).getData()
 				.getResults();
-		
-		logger.info(CONEXÃO_FINALIZADA_COM_SUCESSO);
+
+		logger.info(PROCESSO_FINALIZADO);
 
 		return comics;
 	}
@@ -72,16 +62,12 @@ public class ComicServiceImpl implements ComicService {
 	@Override
 	public List<ComicMarvel> saveComic(String privateKey) {
 
-		logger.info(INICIANDO_MÉTODO_DE_INTEGRAÇÃO_COM_API_EXTERNA);
-		
+		logger.info(INICIANDO_PROCESSO);
+
 		List<ComicMarvel> comics = this.listComicsFromMarvelAPI(privateKey);
-		
-		logger.info(CONEXÃO_FINALIZADA_COM_SUCESSO);
-		
-		logger.info(INICIANDO_SAVE_NO_BANCO_DE_DADOS);
 
 		comics.stream().forEach(c -> comicMarvelRepository.save(c));
-		
+
 		logger.info(PROCESSO_FINALIZADO);
 
 		return comics;
@@ -95,37 +81,35 @@ public class ComicServiceImpl implements ComicService {
 	@Override
 	public Optional<ComicMarvel> getById(Long id) throws GlobalException {
 
-		logger.info(INICIANDO_PROCEDIMENTO_DE_VERIFICAÇÃO_DE_EXISTÊNCIA);
-		
+		logger.info(INICIANDO_PROCESSO);
+
 		if (!comicMarvelRepository.existsById(id)) {
-			throw new GlobalException(REVISTA_NÃO_ENCONTRADA);
+			throw new GlobalException(REVISTA_NÃO_ENCONTRADA + id);
 		}
 
-		
 		logger.info(PROCESSO_FINALIZADO);
-		
+
 		return comicMarvelRepository.findById(id);
 	}
 
 	@Override
 	public MensagemDTO deleteById(Long id) throws GlobalException {
 
-		logger.info(INICIANDO_PROCEDIMENTO_DE_VERIFICAÇÃO_DE_EXISTÊNCIA);
-		
+		logger.info(INICIANDO_PROCESSO);
+
 		if (!comicMarvelRepository.existsById(id)) {
-			throw new GlobalException(REVISTA_NÃO_ENCONTRADA);
+			throw new GlobalException(REVISTA_NÃO_ENCONTRADA + id);
 		}
 
-		
 		comicMarvelRepository.deleteById(id);
 
 		logger.info(PROCESSO_FINALIZADO);
-		
+
 		return new MensagemDTO(REVISTA_APAGADA_COM_SUCESSO);
 	}
 
 	private long timeStampFactory() {
-		
+
 		Long ts = new Date().getTime();
 
 		logger.info("Criando Timestamp!");
@@ -136,12 +120,12 @@ public class ComicServiceImpl implements ComicService {
 	private String createHashMD5(long ts, String privateKey) {
 
 		logger.info("Criando hash!");
-		
+
 		return DigestUtils.md5Hex(ts + privateKey + PUBLIC_KEY);
 	}
 
 	private UriComponents UriBuilder(String hash, Long ts) {
-		
+
 		logger.info("Construindo URI!");
 
 		UriComponents uri = UriComponentsBuilder.newInstance().scheme("http").host("gateway.marvel.com")

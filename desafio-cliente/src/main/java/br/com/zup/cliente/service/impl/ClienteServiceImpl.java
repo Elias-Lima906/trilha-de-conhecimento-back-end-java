@@ -19,71 +19,58 @@ import br.com.zup.cliente.service.ClienteService;
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
-	private static final String INICIANDO_PROCEDIMENTO_DE_BUSCA = "Iniciando processo de busca!";
+	private static final String PROCESSO_FINALIZADO = "Processo Finalizado!";
 
-	private static final String CLIENTE_ALTERADO = "Cliente alterado!";
+	private static final String INICIANDO_PROCESSO = "Iniciando Processo!";
 
-	private static final String INICIANDO_PEOCESSO_DE_ALTERAÇÃO = "Iniciando processo de alteração!";
-
-	private static final String CADASTRO_EFETUADO = "Cadastro efetuado!";
-
-	private static final String INICIANDO_PEOCESSO_DE_CADASTRO = "Iniciando processo de cadastro!";
-
-	private static final String CLIENTE_ENCONTADO = "Cliente encontado!";
-
-	private static final String INICIANDO_PROCEDIMENTO_DE_VERIFICAÇÃO_DE_EXISTÊNCIA = "Iniciando procedimento de verificação de existência!";
-
-	private static final String CLIENTE_JÁ_EXISTE = "CLIENTE JÁ EXISTE NO BANCO DE DADOS!";
+	private static final String CLIENTE_JÁ_EXISTE_COM_CPF = "JÁ EXISTE UM CADASTRO NO BANCO DE DADOS COM O CPF: ";
 
 	private static final String CLIENTE_REMOVIDO_COM_SUCESSO = "CLIENTE REMOVIDO COM SUCESSO";
 
-	private static final String CLIENTE_NÃO_ENCONTRADO = "CLIENTE NÃO ENCONTRADO!";
+	private static final String CLIENTE_NÃO_ENCONTRADO = "CLIENTE NÃO ENCONTRADO PELO CPF: ";
 
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
-	private Logger logger = Logger.getLogger(ClienteServiceImpl.class);
+
+	private Logger logger = Logger.getLogger(this.getClass());
 
 	@Override
 	public Optional<Cliente> buscaCliente(String cpf) throws GlobalException {
 
-		logger.info(INICIANDO_PROCEDIMENTO_DE_VERIFICAÇÃO_DE_EXISTÊNCIA);
-		
+		logger.info(INICIANDO_PROCESSO);
+
 		if (!clienteRepository.existsById(cpf)) {
-			throw new GlobalException(CLIENTE_NÃO_ENCONTRADO);
+			throw new GlobalException(CLIENTE_NÃO_ENCONTRADO + cpf);
 		}
 
-		logger.info(CLIENTE_ENCONTADO);
-		
+		logger.info(PROCESSO_FINALIZADO);
+
 		return clienteRepository.findById(cpf);
 	}
 
 	@Override
 	public List<Cliente> listaCientes() {
-		
-		logger.info(INICIANDO_PROCEDIMENTO_DE_BUSCA);
-		
 		return (List<Cliente>) clienteRepository.findAll();
 	}
 
 	@Override
 	public Cliente adicionaCliente(ClienteDTO clienteDTO) throws GlobalException {
-		
-		logger.info(INICIANDO_PROCEDIMENTO_DE_VERIFICAÇÃO_DE_EXISTÊNCIA);
-		
-		if (clienteRepository.existsById(clienteDTO.getCpf())) {
-			throw new GlobalException(CLIENTE_JÁ_EXISTE);
+
+		logger.info(INICIANDO_PROCESSO);
+
+		String cpf = clienteDTO.getCpf();
+
+		if (clienteRepository.existsById(cpf)) {
+			throw new GlobalException(CLIENTE_JÁ_EXISTE_COM_CPF + cpf);
 		}
-		
-		logger.info(INICIANDO_PEOCESSO_DE_CADASTRO);
 
 		Cliente cliente = new Cliente();
 
 		BeanUtils.copyProperties(clienteDTO, cliente);
 
 		clienteRepository.save(cliente);
-		
-		logger.info(CADASTRO_EFETUADO);
+
+		logger.info(PROCESSO_FINALIZADO);
 
 		return cliente;
 	}
@@ -91,13 +78,11 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public Optional<Cliente> alteraCliente(String cpf, alteraClienteDTO clienteDTO) throws GlobalException {
 
-		logger.info(INICIANDO_PROCEDIMENTO_DE_VERIFICAÇÃO_DE_EXISTÊNCIA);
-		
+		logger.info(INICIANDO_PROCESSO);
+
 		if (!clienteRepository.existsById(cpf)) {
-			throw new GlobalException(CLIENTE_NÃO_ENCONTRADO);
+			throw new GlobalException(CLIENTE_NÃO_ENCONTRADO + cpf);
 		}
-		
-		logger.info(INICIANDO_PEOCESSO_DE_ALTERAÇÃO);
 
 		Optional<Cliente> cliente = clienteRepository.findById(cpf);
 
@@ -105,24 +90,23 @@ public class ClienteServiceImpl implements ClienteService {
 
 		clienteRepository.save(cliente.get());
 
-		logger.info(CLIENTE_ALTERADO);
-		
+		logger.info(PROCESSO_FINALIZADO);
+
 		return cliente;
 	}
 
 	@Override
 	public MensagemDTO removeCliente(String cpf) throws GlobalException {
 
-		logger.info(INICIANDO_PROCEDIMENTO_DE_VERIFICAÇÃO_DE_EXISTÊNCIA);
-		
-		if (clienteRepository.existsById(cpf)) {
+		logger.info(INICIANDO_PROCESSO);
 
-			clienteRepository.deleteById(cpf);
-			return new MensagemDTO(CLIENTE_REMOVIDO_COM_SUCESSO);
+		if (!clienteRepository.existsById(cpf)) {
+			throw new GlobalException(CLIENTE_NÃO_ENCONTRADO + cpf);
 		}
 
-		logger.info("Cliente deletado!");
-		
-		throw new GlobalException(CLIENTE_NÃO_ENCONTRADO);
+		logger.info(PROCESSO_FINALIZADO);
+
+		clienteRepository.deleteById(cpf);
+		return new MensagemDTO(CLIENTE_REMOVIDO_COM_SUCESSO);
 	}
 }
