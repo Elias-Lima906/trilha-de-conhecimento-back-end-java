@@ -1,6 +1,6 @@
 # Comics Marvel
 
-[![NPM](https://img.shields.io/npm/l/react)](https://https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/LICENSE) 
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/LICENSE) 
 
 ## Sobre o projeto
 
