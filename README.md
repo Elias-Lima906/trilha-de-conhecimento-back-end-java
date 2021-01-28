@@ -25,10 +25,10 @@ Há além disso um CRUD de cliente, vizando numa proxima fase, transforma-lá nu
 
 ```Obs: Para acessar a documentação via SWAGGER, é necessario estar com a API rodando localmente!```
 
-![API Documentation](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/API%20DUCUMENTATION.png)
-![Crud Comic](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/Comic%20CRUD.png)
-![Crud Cliente](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/Cliente%20CRUD.png)
-![Comic Requisition](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/Comic%20Requisition.png)
+![API Documentation](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/comic-marvel/image/API%20DUCUMENTATION.png)
+![Crud Comic](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/comic-marvel/image/Comic%20CRUD.png)
+![Crud Cliente](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/comic-marvel/image/Cliente%20CRUD.png)
+![Comic Requisition](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/comic-marvel/image/Comic%20Requisition.png)
  
  
  ## Tecnologias utilizadas
