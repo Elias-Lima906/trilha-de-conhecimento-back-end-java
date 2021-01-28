@@ -20,17 +20,33 @@ Cada recurso nela foi um tópico a ser estudado, como:
 Há além disso um CRUD de cliente, vizando numa proxima fase, transforma-lá numa API de loja de quadrinhos!
 
  # Documentação
-[Swagger](http://localhost:8080/swagger-ui.html#)
+```Link:``` [Swagger](http://localhost:8080/swagger-ui.html#)
+
+```Obs: Para acessar a documentação via SWAGGER, é necessario estar com a API rodando localmente!```
+
+![API Documentation](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/API%20DUCUMENTATION.png)
+![Crud Comic](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/Comic%20CRUD.png)
+![Crud Cliente](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/Cliente%20CRUD.png)
+![Comic Requisition](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/Comic%20Requisition.png)
  
+ # Requisitos mínimos recomendados
+ 
+- Java V: 8
+- Spring Boot V: 2.3.8
+- Maven V: 3
+- Git V: 2
+- MySQL V: 8.0
+- Postman V: 8.0.2
+
 ## Tecnologias utilizadas
 
-- Java
-- Spring Boot
-- JPA / Hibernate
-- Maven
-- Git
-- Postman
-- MySQL
+- Java V: 15
+- Spring Boot V: 2.4.2
+- JPA / Hibernate V: Pré-definida pelo Spring Initializr
+- Maven V: 3.6
+- Git V: 2.30
+- MySQL V: 8.0
+- Postman V: 8.0.2
 
 ## Como executar o projeto
 
@@ -40,6 +56,9 @@ git clone https: https://github.com/Elias-Lima906/trilha-de-conhecimento-back-en
 
 # entrar na pasta do projeto
 cd ```nome do projeto```
+
+# executar o comando de instalação das dependencias
+mvn clean install
 
 # executar o projeto
 mvn spring-boot:run
