@@ -30,7 +30,7 @@ Há além disso um CRUD de cliente, vizando numa proxima fase, transforma-lá nu
 ![Crud Cliente](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/Cliente%20CRUD.png)
 ![Comic Requisition](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/Comic%20Requisition.png)
  
- ```bash
+ 
  ## Tecnologias utilizadas
 
 - Java V: 15
@@ -40,9 +40,9 @@ Há além disso um CRUD de cliente, vizando numa proxima fase, transforma-lá nu
 - Git V: 2.30
 - MySQL V: 8.0
 - Postman V: 8.0.2
-```
 
- ```bash
+
+ 
  # Requisitos mínimos recomendados
  
 - Java V: 8
@@ -51,11 +51,11 @@ Há além disso um CRUD de cliente, vizando numa proxima fase, transforma-lá nu
 - Git V: 2
 - MySQL V: 8.0
 - Postman V: 8.0.2
-```
+
 
 ## Como executar o projeto
 
-```bash
+```
 # clonar repositório
 git clone https: https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java.git
 
