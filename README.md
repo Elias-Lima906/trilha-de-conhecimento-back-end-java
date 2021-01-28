@@ -14,6 +14,7 @@ Cada recurso nela foi um tópico a ser estudado, como:
 - Conceito de API-Rest
 - Testes Unitários
 - Handler de erros
+- Documentação
 - Logs
 - Crud
 
