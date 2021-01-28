@@ -38,7 +38,7 @@ public class IntegrationMarvelAPIMethodTest {
 		Assert.assertEquals(expectedComics.get(0), returnedComics.get(0));
 	}
 
-	@Test(expected = (HttpClientErrorException.Unauthorized.class))
+	@Test(expected = HttpClientErrorException.class)
 	public void shouldNotListMarvelAPIComicsIfHashHasNotBeenBuiltCorrectly() {
 
 		Mockito.when(comicServiceImpl.listComicsFromMarvelAPI(""))
