@@ -55,18 +55,18 @@ Há além disso um CRUD de cliente, vizando numa proxima fase, transforma-lá nu
 
 ## Como executar o projeto
 
-```
+```bash
 # clonar repositório
-git clone https: https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java.git
+"git clone https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java.git"
 
 # entrar na pasta do projeto
-cd *nome do projeto*
+"cd 'nome-do-projeto'"
 
 # executar o comando de instalação das dependencias
-mvn clean install
+"mvn clean install"
 
 # executar o projeto
-mvn spring-boot:run
+"mvn spring-boot:run"
 ```
 
 # Autoria
