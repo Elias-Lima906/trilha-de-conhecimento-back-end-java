@@ -30,16 +30,8 @@ Há além disso um CRUD de cliente, vizando numa proxima fase, transforma-lá nu
 ![Crud Cliente](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/Cliente%20CRUD.png)
 ![Comic Requisition](https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java/blob/main/desafio-cliente/image/Comic%20Requisition.png)
  
- # Requisitos mínimos recomendados
- 
-- Java V: 8
-- Spring Boot V: 2.3.8
-- Maven V: 3
-- Git V: 2
-- MySQL V: 8.0
-- Postman V: 8.0.2
-
-## Tecnologias utilizadas
+ ```bash
+ ## Tecnologias utilizadas
 
 - Java V: 15
 - Spring Boot V: 2.4.2
@@ -48,6 +40,18 @@ Há além disso um CRUD de cliente, vizando numa proxima fase, transforma-lá nu
 - Git V: 2.30
 - MySQL V: 8.0
 - Postman V: 8.0.2
+```
+
+ ```bash
+ # Requisitos mínimos recomendados
+ 
+- Java V: 8
+- Spring Boot V: 2.3.8
+- Maven V: 3
+- Git V: 2
+- MySQL V: 8.0
+- Postman V: 8.0.2
+```
 
 ## Como executar o projeto
 
@@ -56,7 +60,7 @@ Há além disso um CRUD de cliente, vizando numa proxima fase, transforma-lá nu
 git clone https: https://github.com/Elias-Lima906/trilha-de-conhecimento-back-end-java.git
 
 # entrar na pasta do projeto
-cd ```nome do projeto```
+cd *nome do projeto*
 
 # executar o comando de instalação das dependencias
 mvn clean install
